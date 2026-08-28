@@ -2,13 +2,15 @@
 
 A Streamlit app with three independent, chat-with-your-sources RAG workspaces — pick one from the landing screen and start asking questions.
 
+🔗 **Live app:** [newsrag-ks8xq9ays35cvvmdjqbsjd.streamlit.app](https://newsrag-ks8xq9ays35cvvmdjqbsjd.streamlit.app/)
+
 | Workspace | What it does |
 |---|---|
 | 📰 **Newsroom** | Load a full day's coverage from 14 major newspapers (Indian + international). Pick a publication and a date, then chat with what was actually printed. |
 | 🧭 **Topic Radar** | Search any keyword or story across every publisher NewsAPI indexes, over a date range. Good for tracking a developing story across outlets. |
 | 📄 **Document Vault** | Upload your own PDFs and chat with them directly, page by page. Fully isolated from any newspaper content. |
 
-Each workspace keeps its **own chat history, its own retrieval scope, and its own loaded sources** — nothing bleeds between them. Under the hood it's LangChain + FAISS for retrieval, Groq (Llama 3.1 8B Instant) for generation, and NewsAPI for article data.
+Each workspace keeps its **own chat history, its own retrieval scope, and its own loaded sources** — nothing bleeds between them. Under the hood it's LangChain + FAISS for retrieval, Groq (`openai/gpt-oss-20b`) for generation, and NewsAPI for article data.
 
 ## Features
 
@@ -42,7 +44,7 @@ Each workspace keeps its **own chat history, its own retrieval scope, and its ow
 
    (If deploying to Streamlit Community Cloud, add these under your app's **Settings → Secrets** instead of committing this file.)
 
-3. **Run the app:**
+3. **Run the app locally:**
 
    ```bash
    streamlit run app.py
@@ -50,6 +52,14 @@ Each workspace keeps its **own chat history, its own retrieval scope, and its ow
 
    It opens at `http://localhost:8501`.
 
+## Deployment
+
+This app is deployed on **Streamlit Community Cloud**. To deploy your own copy:
+
+1. Push this repo to GitHub.
+2. On [share.streamlit.io](https://share.streamlit.io), create a new app pointing at `app.py`.
+3. Add `GROQ_API_KEY` and `NEWSAPI_KEY` under **Settings → Secrets** (same format as `secrets.toml` above).
+4. Deploy — Streamlit Cloud installs `requirements.txt` automatically.
 
 ## Project structure
 
@@ -64,7 +74,7 @@ Each workspace keeps its **own chat history, its own retrieval scope, and its ow
 
 ## Tech stack
 
-Streamlit · LangChain (core, text-splitters, community, groq, huggingface) · FAISS · sentence-transformers (`all-MiniLM-L6-v2`) · Groq (Llama 3.1 8B Instant) · pypdf · NewsAPI
+Streamlit · LangChain (core, text-splitters, community, groq, huggingface) · FAISS · sentence-transformers (`all-MiniLM-L6-v2`) · Groq (`openai/gpt-oss-20b`) · pypdf · NewsAPI
 
 ## Known limitations
 
